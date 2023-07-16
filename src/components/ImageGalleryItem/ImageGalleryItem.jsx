@@ -3,7 +3,7 @@ import css from './ImageGalleryItem.module.css';
 
 export const ImageGalleryItem = props => {
   return (
-    <li class={css.imageGalleryItem}>
+    <li className={css.imageGalleryItem}>
       <img className={css.imageGalleryItemImage} src="" alt="" />
     </li>
   );

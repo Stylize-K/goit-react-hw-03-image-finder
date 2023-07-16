@@ -7,16 +7,16 @@ export class Searchbar extends Component {
 
   render() {
     return (
-      <header class={css.searchBar}>
-        <form class={css.searchForm}>
-          <button type="submit" class={css.searchFormButton}>
-            <span class={css.searchFormButtonLabel}>Search</span>
+      <header className={css.searchBar}>
+        <form className={css.searchForm}>
+          <button type="submit" className={css.searchFormButton}>
+            <span className={css.searchFormButtonLabel}>Search</span>
           </button>
           <input
-            class={css.searchFormInput}
+            className={css.searchFormInput}
             type="text"
-            autocomplete="off"
-            autofocus
+            autoComplete="off"
+            autoFocus
             placeholder="Search images and photos"
           />
         </form>

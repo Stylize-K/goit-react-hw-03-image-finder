@@ -3,8 +3,8 @@ import css from './Modal.modal.css';
 
 export const Modal = props => {
   return (
-    <div class={css.overlay}>
-      <div class={css.modal}>
+    <div className={css.overlay}>
+      <div className={css.modal}>
         <img src="" alt="" />
       </div>
     </div>

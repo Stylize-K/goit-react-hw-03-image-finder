@@ -4,7 +4,7 @@ import css from './ImageGallery.module.css';
 
 export const ImageGallery = props => {
   return (
-    <ul class={css.imageGallery}>
+    <ul className={css.imageGallery}>
       <ImageGalleryItem />
     </ul>
   );
