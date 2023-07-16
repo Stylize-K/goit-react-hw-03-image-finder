@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import css from './ImageGalleryItem.module.css';
 
 export const ImageGalleryItem = props => {
@@ -9,4 +9,4 @@ export const ImageGalleryItem = props => {
   );
 };
 
-ImageGalleryItem.propTypes = {};
+// ImageGalleryItem.propTypes = {};

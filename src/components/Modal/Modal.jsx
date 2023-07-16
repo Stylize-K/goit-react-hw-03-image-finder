@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import css from './Modal.modal.css';
 
 export const Modal = props => {
@@ -11,4 +11,4 @@ export const Modal = props => {
   );
 };
 
-Modal.propTypes = {};
+// Modal.propTypes = {};
