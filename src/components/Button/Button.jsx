@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import css from './Button.module.css';
 
 export const Button = props => {
@@ -9,4 +9,4 @@ export const Button = props => {
   );
 };
 
-Button.propTypes = {};
+// Button.propTypes = {};
