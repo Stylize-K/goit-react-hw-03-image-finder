@@ -22,7 +22,7 @@ export class App extends Component {
 
   //Метод обробки сабміту форми - додаємо дані в state (дані отримуємо з компонента serchBar)
   handleFormSubmit = query => {
-    this.setState({ query, page: 1, images: [] });
+    this.setState({ query, page: 1, images: [], endCollection: false });
   };
 
   //Метод обробки кліку на кнопку "Load more"
@@ -38,10 +38,14 @@ export class App extends Component {
 
         const data = await fetchImages(query, page);
 
+        this.setState(prevState => ({
+          images: [...prevState.images, ...data.hits],
+        }));
+
         console.log(data);
 
         if (!data.totalHits) {
-          toast.success(
+          return toast.success(
             'Sorry, there are no images matching your search query. Please try again'
           );
         }
@@ -50,13 +54,8 @@ export class App extends Component {
 
         if (page === totalPages) {
           this.setState({ endCollection: true });
-          return toast.success('No more pictures');
+          toast.success('No more pictures');
         }
-
-        this.setState(prevState => ({
-          images: [...prevState.images, ...data.hits],
-          endCollection: false,
-        }));
       } catch (error) {
         console.log('Error', error.message);
       } finally {
