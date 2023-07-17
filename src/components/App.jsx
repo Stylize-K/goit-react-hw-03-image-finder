@@ -31,27 +31,27 @@ export class App extends Component {
       try {
         this.setState({ isLoading: true });
 
-        await fetchImages(query, page)
-          .then(respons => {
-            const data = respons;
-            console.log(data);
-            this.setState(({ images }) => ({
-              images: [...images, ...data],
-            }));
-            // if (data.length < 12) {
-            //   toast.success(
-            //     "We're sorry, but you've reached the end of search results"
-            //   );
-            // }
-            if (!data) {
-              toast.success(
-                'Sorry, there are no images matching your search query. Please try again'
-              );
-            }
-          })
-          .catch(error => {
-            console.log('Error', error.message);
-          });
+        const data = await fetchImages(query, page);
+
+        console.log(data);
+
+        if (!data.totalHits) {
+          toast.success(
+            'Sorry, there are no images matching your search query. Please try again'
+          );
+        }
+
+        const totalPages = Math.ceil(data.totalHits / 12);
+
+        if (page === totalPages) {
+          this.setState({ endCollection: true });
+          return toast.success('No more pictures');
+        }
+
+        this.setState(prevState => ({
+          images: [...prevState.images, ...data.hits],
+          endOfCollection: false,
+        }));
       } catch (error) {
         console.log('Error', error.message);
       } finally {
