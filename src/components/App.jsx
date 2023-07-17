@@ -1,11 +1,11 @@
 import { Component } from 'react';
-
+import { ThreeCircles } from 'react-loader-spinner';
 import toast, { Toaster } from 'react-hot-toast';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Searchbar } from './Searchbar/Searchbar';
 import { fetchImages } from 'services/apiService';
-// import { Loader } from './Loader/Loader';
-// import { Button } from './Button/Button';
+import { Loader } from './Loader/Loader';
+import { Button } from './Button/Button';
 // import { Modal } from './Modal/Modal';
 import css from './App.module.css';
 
@@ -23,6 +23,11 @@ export class App extends Component {
   //Метод обробки сабміту форми - додаємо дані в state (дані отримуємо з компонента serchBar)
   handleFormSubmit = query => {
     this.setState({ query, page: 1, images: [] });
+  };
+
+  //Метод обробки кліку на кнопку "Load more"
+  handleLoadMore = () => {
+    this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
   async componentDidUpdate(prevProps, prevState) {
@@ -61,14 +66,30 @@ export class App extends Component {
   }
 
   render() {
+    const { images, isLoading, endCollection } = this.state;
+    const showLoadMoreBtn = images.length > 0 && !endCollection;
     return (
       <div className={css.app}>
         <Toaster position="top-right" reverseOrder={false} />
         <Searchbar onSubmit={this.handleFormSubmit} />
         <ImageGallery images={this.state.images} />
-        {/* <Loader />
-      <Button />
-      <Modal /> */}
+        {showLoadMoreBtn && <Button onClick={() => this.handleLoadMore()} />}
+        {isLoading && (
+          <Loader>
+            <ThreeCircles
+              height="100"
+              width="100"
+              color="#063970"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+              ariaLabel="three-circles-rotating"
+              outerCircleColor=""
+              innerCircleColor=""
+              middleCircleColor=""
+            />
+          </Loader>
+        )}
       </div>
     );
   }
