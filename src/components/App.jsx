@@ -55,7 +55,7 @@ export class App extends Component {
 
         this.setState(prevState => ({
           images: [...prevState.images, ...data.hits],
-          endOfCollection: false,
+          endCollection: false,
         }));
       } catch (error) {
         console.log('Error', error.message);
