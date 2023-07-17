@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import { toast } from 'react-toastify';
+
+import toast from 'react-hot-toast';
 import { FcSearch } from 'react-icons/fc';
 import PropTypes from 'prop-types';
 import css from './Searchbar.module.css';
@@ -36,6 +37,7 @@ export class Searchbar extends Component {
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
+            value={this.state.query}
             onChange={this.handleImputChange}
           />
         </form>
