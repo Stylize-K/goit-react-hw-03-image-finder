@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import { ToastContainer} from 'react-toastify';
+
+import toast, { Toaster } from 'react-hot-toast';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Searchbar } from './Searchbar/Searchbar';
 import { fetchImages } from 'services/apiService';
@@ -37,8 +38,9 @@ export class App extends Component {
             this.setState(({ images }) => ({
               images: [...images, ...data],
             }));
-            if (data.length < 12) {
-              console.log('It was the last page. Please try another query.');
+            // if (data.length < 12) {
+            //   toast.success(
+            //     "We're sorry, but you've reached the end of search results"
             //   );
             // }
             if (!data) {
@@ -61,7 +63,7 @@ export class App extends Component {
   render() {
     return (
       <div className={css.app}>
-        <ToastContainer />
+        <Toaster position="top-right" reverseOrder={false} />
         <Searchbar onSubmit={this.handleFormSubmit} />
         <ImageGallery images={this.state.images} />
         {/* <Loader />
