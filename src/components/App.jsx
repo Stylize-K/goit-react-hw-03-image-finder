@@ -6,7 +6,7 @@ import { Searchbar } from './Searchbar/Searchbar';
 import { fetchImages } from 'services/apiService';
 import { Loader } from './Loader/Loader';
 import { Button } from './Button/Button';
-// import { Modal } from './Modal/Modal';
+import { Modal } from './Modal/Modal';
 import css from './App.module.css';
 
 export class App extends Component {
@@ -18,6 +18,25 @@ export class App extends Component {
     isLoading: false,
     showModal: false,
     endCollection: false,
+    tags: '',
+  };
+
+  //Метод відкриття модального вікна
+  openModal = (url, tags) => {
+    this.setState({
+      showModal: true,
+      modalImageURL: url,
+      tags,
+    });
+  };
+
+  //Метод закриття модального вікна
+  closeModal = () => {
+    this.setState({
+      showModal: false,
+      modalImageURL: '',
+      tags: '',
+    });
   };
 
   //Метод обробки сабміту форми - додаємо дані в state (дані отримуємо з компонента serchBar)
@@ -65,13 +84,19 @@ export class App extends Component {
   }
 
   render() {
-    const { images, isLoading, endCollection } = this.state;
+    const { images, isLoading, endCollection, showModal, modalImageURL } =
+      this.state;
     const showLoadMoreBtn = images.length > 0 && !endCollection;
     return (
       <div className={css.app}>
         <Toaster position="top-right" reverseOrder={false} />
+        {showModal && (
+          <Modal onClose={this.closeModal}>
+            <img src={modalImageURL} alt={this.state.tags} />
+          </Modal>
+        )}
         <Searchbar onSubmit={this.handleFormSubmit} />
-        <ImageGallery images={this.state.images} />
+        <ImageGallery images={this.state.images} onClick={this.openModal} />
         {showLoadMoreBtn && <Button onClick={() => this.handleLoadMore()} />}
         {isLoading && (
           <Loader>
